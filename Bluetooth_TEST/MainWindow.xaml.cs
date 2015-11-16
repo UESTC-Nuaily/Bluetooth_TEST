@@ -15,15 +15,12 @@ namespace Bluetooth_TEST
         InTheHand.Net.Sockets.BluetoothClient cli = new InTheHand.Net.Sockets.BluetoothClient();
         InTheHand.Net.Sockets.BluetoothDeviceInfo[] devices;
         DispatcherTimer timer;                                                 //创建一个timer类
+        string file;
         public MainWindow()
         {
             InitializeComponent();
             ObservableObj = new ObservableCollection<object>();
             listView.DataContext = ObservableObj;
-            timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromSeconds(10);
-            timer.Tick += timer_Tick;
-            timer.Start();
         }
         private void Open_Click(object sender, RoutedEventArgs e)
         {
@@ -87,7 +84,20 @@ namespace Bluetooth_TEST
         }
         private void listView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+        }
 
+        private void commit_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void choice_button_Click(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Win32.OpenFileDialog dialog =new Microsoft.Win32.OpenFileDialog();
+            dialog.ShowDialog();
+            file = dialog.FileName;
+            string[] temp = file.Split('\\');
+            filename.Text = temp[temp.Length - 1];                           //运用字符串分割，得到文件名
         }
     }
 }
